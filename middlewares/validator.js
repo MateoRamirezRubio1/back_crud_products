@@ -1,5 +1,9 @@
 const { body, param, validationResult } = require('express-validator');
 
+/**
+ * Validation middleware for product creation and update.
+ * Validates the request body to ensure it meets the criteria for name, price, and optional description.
+ */
 exports.validateProduct = [
     body('name').isString().trim().escape(),
     body('price').isFloat({ gt: 0 }),
@@ -13,6 +17,10 @@ exports.validateProduct = [
     },
 ];
 
+/**
+ * Validation middleware for validating product ID in request parameters.
+ * Ensures 'id' is an integer.
+ */
 exports.validateProductId = [
     param('id').isInt(),
     (req, res, next) => {

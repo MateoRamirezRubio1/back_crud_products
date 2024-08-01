@@ -1,6 +1,8 @@
-const { raw } = require('express');
 const db = require('../config/db');
 
+/**
+ * Retrieve all products from the database.
+ */
 exports.getAllProducts = async () => {
     try {
         const result = await db.query('SELECT * FROM products');
@@ -12,6 +14,9 @@ exports.getAllProducts = async () => {
 
 };
 
+/**
+ * Retrieve a specific product by ID from the database.
+ */
 exports.getProductById = async (id) => {
     try {
         const result = await db.query('SELECT * FROM products WHERE id = $1', [id]);
@@ -22,6 +27,9 @@ exports.getProductById = async (id) => {
     }
 };
 
+/**
+ * Create a new product in the database.
+ */
 exports.createProduct = async (product) => {
     try {
         const { name, price, description } = product;
@@ -36,6 +44,9 @@ exports.createProduct = async (product) => {
     }
 };
 
+/**
+ * Update an existing product in the database.
+ */
 exports.updateProduct = async (id, product) => {
     try {
         const { name, price, description } = product;
@@ -50,6 +61,9 @@ exports.updateProduct = async (id, product) => {
     }
 };
 
+/**
+ * Delete a product from the database.
+ */
 exports.deleteProduct = async (id) => {
     try {
         const result = await db.query('DELETE FROM products WHERE id = $1 RETURNING *', [id]);
