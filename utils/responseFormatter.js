@@ -1,7 +1,10 @@
-exports.success = (data) => {
-    return { success: true, data };
-};
+exports.success = (data) => ({
+    status: 'success',
+    data,
+});
 
-exports.error = (message) => {
-    return { succes: false, error: message };
-};
+exports.error = (message, details = []) => ({
+    status: 'error',
+    message,
+    details,
+});

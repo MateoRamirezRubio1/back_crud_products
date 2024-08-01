@@ -1,49 +1,62 @@
 const productModel = require('../models/productModel');
 
-const getAllProducts = async () => {
+exports.getAllProducts = async () => {
     try {
         return await productModel.getAllProducts();
     } catch (error) {
-        throw new Error(`Service error: Unable to retrieve products. ${error.message}`);
+        throw new Error('Unable to fetch products');
     }
 };
 
-const createProduct = async (product) => {
+exports.getProductById = async (id) => {
     try {
-        return await productModel.createProduct(product);
+        const product = await productModel.getProductById(id);
+        if (!product) {
+            const error = new Error(`Product with ID ${id} not found`);
+            error.statusCode = 404;
+            error.isOperational = true;
+            throw error;
+        }
+        return product;
     } catch (error) {
-        throw new Error(`Service error: Unable to create product. ${error.message}`);
+        throw error;
     }
 };
 
-const updateProduct = async (id, product) => {
+exports.createProduct = async (productData) => {
+    try {
+        return await productModel.createProduct(productData);
+    } catch (error) {
+        throw new Error(`Unable to create product'`);
+    }
+};
+
+exports.updateProduct = async (id, productData) => {
     try {
         const existingProduct = await productModel.getProductById(id);
         if (!existingProduct) {
-            throw new Error(`Product with ID ${id} not found`);
+            const error = new Error(`Product with ID ${id} not found`);
+            error.statusCode = 404;
+            error.isOperational = true;
+            throw error;
         }
-        return await productModel.updateProduct(id, product);
+        return await productModel.updateProduct(existingProduct.id, productData);
     } catch (error) {
-        throw new Error(`Service error: Unable to update product with ID ${id}. ${error.message}`);
+        throw error;
     }
 };
 
-const deleteProduct = async (id) => {
+exports.deleteProduct = async (id) => {
     try {
         const existingProduct = await productModel.getProductById(id);
         if (!existingProduct) {
-            throw new Error(`Product with ID ${id} not found`);
+            const error = new Error(`Product with ID ${id} not found`);
+            error.statusCode = 404;
+            error.isOperational = true;
+            throw error;
         }
-        await productModel.deleteProduct(id);
-        return existingProduct;
+        return await productModel.deleteProduct(existingProduct.id);
     } catch (error) {
-        throw new Error(`Service error: Unable to delete product with ID ${id}. ${error.message}`);
+        throw error;
     }
-};
-
-module.exports = {
-    getAllProducts,
-    createProduct,
-    updateProduct,
-    deleteProduct,
 };

@@ -6,7 +6,8 @@ const { apiLimiter } = require('../middlewares/rateLimiter');
 
 router.use(apiLimiter);
 
-router.get('/products', productController.getProducts);
+router.get('/products', productController.getAllProducts);
+router.get('/products/:id', validateProductId, productController.getProductById);
 router.post('/products', validateProduct, productController.createProduct);
 router.put('/products/:id', validateProductId, validateProduct, productController.updateProduct);
 router.delete('/products/:id', validateProductId, productController.deleteProduct);
