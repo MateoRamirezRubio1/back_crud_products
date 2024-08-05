@@ -1,15 +1,22 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const helmet = require('helmet');
 const swaggerDocs = require('./config/swagger');
 const productRoutes = require('./routers/productRoutes');
 const errorHandler = require('./middlewares/errorHandler');
+
+// To accept requests from others devices
+app.use(cors());
 
 // Security middleware to set various HTTP headers
 app.use(helmet());
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
+
+// Route when it can be obtained product's image
+app.use('/uploads/images', express.static('uploads/images'));
 
 // Route handling for product-related endpoints
 app.use('/api/v1', productRoutes);

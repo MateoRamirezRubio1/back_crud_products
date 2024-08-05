@@ -32,10 +32,10 @@ exports.getProductById = async (id) => {
  */
 exports.createProduct = async (product) => {
     try {
-        const { name, price, description } = product;
+        const { name, price, description, image_path } = product;
         const result = await db.query(
-            'INSERT INTO products (name, price, description) VALUES ($1, $2, $3) RETURNING *',
-            [name, price, description]
+            'INSERT INTO products (name, price, description, image_path) VALUES ($1, $2, $3, $4) RETURNING *',
+            [name, price, description, image_path]
         );
         return result.rows[0];
     } catch (error) {
@@ -49,10 +49,10 @@ exports.createProduct = async (product) => {
  */
 exports.updateProduct = async (id, product) => {
     try {
-        const { name, price, description } = product;
+        const { name, price, description, image_path } = product;
         const result = await db.query(
-            'UPDATE products SET name = $1, price = $2, description = $3 where id = $4 RETURNING *',
-            [name, price, description, id]
+            'UPDATE products SET name = $1, price = $2, description = $3, image_path = $4 where id = $5 RETURNING *',
+            [name, price, description, image_path, id]
         );
         return result.rows[0];
     } catch (error) {
