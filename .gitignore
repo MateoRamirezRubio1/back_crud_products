@@ -1,9 +1,20 @@
 # Node modules
 /node_modules/
+node_modules
 
 # Logs
+logs
 *.log
-logs/
+npm-debug.log*
 
 # Environment variables
 .env
+
+.DS_Store
+Thumbs.db
+
+# Directorio de build de producción
+dist
+
+# Directorio de cobertura de pruebas
+coverage

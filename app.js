@@ -15,7 +15,7 @@ app.use(helmet());
 // Middleware to parse JSON request bodies
 app.use(express.json());
 
-// Route when it can be obtained product's image
+// Route when it can be obtained product images
 app.use('/uploads/images', express.static('uploads/images'));
 
 // Route handling for product-related endpoints
