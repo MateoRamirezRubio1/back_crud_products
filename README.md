@@ -7,6 +7,8 @@
 
 Esta aplicación está diseñada para gestionar productos mediante una API RESTful utilizando Express.js. La aplicación está Dockerizada para facilitar su despliegue y mantenimiento. La base de datos utilizada es PostgreSQL, y la API se documenta con Swagger.
 
+**Puedes encontrar un FrontEnd movil funcional con Flutter que usa esta API con su demostración visual aquí:** [Frontend Flutter](https://github.com/MateoRamirezRubio1/flutter-app-to-crud-products)
+
 ---
 
 ## 🛠️ Tecnologías Utilizadas
@@ -34,6 +36,8 @@ Esta aplicación está diseñada para gestionar productos mediante una API RESTf
 ## 🌐 Rutas de la API
 
 ### Rutas Principales
+
+![image](https://github.com/user-attachments/assets/04f62d67-c17c-43f8-a016-0a628cf32199)
 
 Base URL: `/api/v1`
 
